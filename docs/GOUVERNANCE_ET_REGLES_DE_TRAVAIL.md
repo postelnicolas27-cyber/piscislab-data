@@ -123,6 +123,44 @@ est considérée comme **non valide**.
 
 ---
 
+### 4.5 Règle absolue — Clôture et relance de conversation
+
+Toute fin de conversation de travail sur le projet PiscisLab
+doit obligatoirement respecter le processus suivant
+avant toute reprise dans une nouvelle conversation.
+
+1. **Mise à jour complète de la documentation**
+   - Toutes les décisions prises dans la conversation doivent être retranscrites.
+   - La documentation doit refléter l’état réel du projet.
+
+2. **Création d’un document de synthèse**
+   - Un document de synthèse doit être créé.
+   - Il doit contenir :
+     - les décisions validées
+     - ce qui est terminé
+     - ce qui reste à faire
+     - ce qui fonctionne
+     - ce qui ne fonctionne pas
+   - Ce document sert de référence contractuelle.
+
+3. **Mise à jour Git**
+   - Toute décision validée doit être versionnée.
+   - Aucun état intermédiaire non documenté ne doit rester hors Git.
+
+4. **Rédaction d’un prompt de relance structuré**
+   - Un prompt dédié doit être rédigé pour la nouvelle conversation.
+   - Ce prompt doit :
+     - imposer la lecture et l’application de la documentation existante
+     - imposer la lecture de tous les fichiers fournis
+     - résumer l’état du projet
+     - préciser les objectifs de la reprise
+     - rappeler les règles fondamentales
+
+Toute reprise de travail sans ce processus
+est considérée comme **non conforme**.
+
+---
+
 ## 5. Données
 
 ### 5.1 Données publiques
