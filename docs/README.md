@@ -17,6 +17,12 @@ Chaque document fait partie intégrante du socle et doit être respecté.
 
 > Définit la carte comme interface principale, la nature hybride, et le principe des couches non figées.
 
+### 🛠️ Choix techniques locaux
+- [Choix techniques locaux](./CHOIX_TECHNIQUES_LOCAUX.md)
+
+> Décrit l’environnement de travail local (VS Code, mini-serveur, HTML minimal) et les raisons des choix effectués.
+
+
 ---
 
 ### 📦 Données publiques
