@@ -1,0 +1,9 @@
+{
+  "meta": {
+    "project": "PiscisLab",
+    "type": "environments",
+    "version": "1.0.0",
+    "readonly": true
+  },
+  "items": []
+}
