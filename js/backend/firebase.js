@@ -27,7 +27,7 @@ const firebaseConfig = {
     apiKey: "AIzaSyDlbCaLrJYjg-VumgKXP185rFd6NbBiTGg",
     authDomain: "piscislab-28b38.firebaseapp.com",
     projectId: "piscislab-28b38",
-    storageBucket: "piscislab-28b38.firebasestorage.app",
+    storageBucket: "piscislab-28b38.appspot.com",
     messagingSenderId: "936910312028",
     appId: "1:936910312028:web:db1c6105e244023a7f8c99"
 };
