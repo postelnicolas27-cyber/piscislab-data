@@ -60,8 +60,10 @@ doit être formalisée ici avant toute implémentation.
 
 ### 📜 Décisions & synthèses
 - [2026-01-22 — Base carte interactive & système de couches](./DECISIONS/2026-01-22_BASE_CARTE_ET_SYSTEME_DE_COUCHES.md)
+- [2026-01-26 — Socle Firebase (Auth & Firestore)](./DECISIONS/2026-01-26_SOCLE_FIREBASE_AUTH_FIRESTORE.md)
 
-> Document de synthèse contractuelle reprenant les décisions fondatrices prises lors de la mise en place de la carte centrale et du système de couches.
+> Documents de synthèse contractuels reprenant les décisions structurantes validées du projet.
+
 
 ---
 
