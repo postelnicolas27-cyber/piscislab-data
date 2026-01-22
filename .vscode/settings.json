@@ -1,0 +1,9 @@
+{
+  "editor.formatOnSave": true,
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features",
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true
+  },
+  "json.validate.enable": true
+}

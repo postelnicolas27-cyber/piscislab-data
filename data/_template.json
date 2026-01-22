@@ -1,0 +1,10 @@
+{
+  "meta": {
+    "project": "PiscisLab",
+    "type": "template",
+    "version": "1.0.0",
+    "description": "Modèle de fichier JSON pour les données globales PiscisLab",
+    "readonly": true
+  },
+  "items": []
+}

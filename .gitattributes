@@ -1,0 +1,8 @@
+# Normaliser les fins de lignes dans le dépôt
+* text=auto eol=lf
+
+# JSON toujours en LF
+*.json text eol=lf
+
+# Markdown en LF
+*.md text eol=lf
