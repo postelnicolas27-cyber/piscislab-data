@@ -12,6 +12,11 @@ Chaque document fait partie intégrante du socle et doit être respecté.
 
 > Définit la façon de travailler, les règles absolues et le rythme du projet.
 
+### 🗺️ Carte interactive (base UI)
+- [Carte interactive – base conceptuelle](./CARTE_INTERACTIVE_BASE.md)
+
+> Définit la carte comme interface principale, la nature hybride, et le principe des couches non figées.
+
 ---
 
 ### 📦 Données publiques

@@ -92,6 +92,23 @@ Le projet privilégie :
 
 ---
 
+## 7.1 Règle absolue — Documentation indexée
+
+Toute création ou ajout d’un document de référence implique
+OBLIGATOIREMENT :
+
+1. La mise à jour immédiate de `docs/README.md`
+2. L’ajout du document dans la section appropriée
+3. Une validation explicite avant tout commit
+
+Aucun document ne doit exister sans être référencé dans l’index.
+
+Si cette règle n’est pas respectée :
+- l’étape est considérée comme INVALIDE
+- aucun commit ne doit être effectué
+
+---
+
 ## 8. Évolution du projet
 
 Toute évolution doit respecter :
