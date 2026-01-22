@@ -57,6 +57,72 @@ Le projet privilégie :
 
 ---
 
+### 4.3 Règle absolue — Process de modification des fichiers
+
+Toute modification d’un fichier existant (`html`, `js`, `css`, `php`, etc.)
+doit obligatoirement respecter le processus suivant :
+
+1. **Demande explicite du fichier concerné**
+   - Le fichier ou le code complet doit être fourni avant toute proposition de modification.
+
+2. **Lecture réelle et complète du fichier**
+   - Le fichier est lu intégralement.
+   - Aucune modification ne doit être proposée sans analyse réelle du contenu.
+
+3. **Restitution du fichier complet après modification**
+   - Le fichier modifié doit être rendu **en entier** dans la mesure du possible.
+   - Aucune fonction, logique ou ligne ne doit être supprimée implicitement.
+   - Toute suppression ou modification de comportement doit être **explicitement signalée**.
+
+4. **Cas des modifications partielles (patchs)**
+   - Si une modification ne concerne qu’un extrait de code
+     (ajout, remplacement ou suppression ciblée),
+     le fichier complet doit être **redemandé et relu intégralement**
+     avant validation finale.
+
+Tout non-respect de ce processus est considéré comme une **faute de méthode**.
+
+Conséquences :
+- l’étape est invalide
+- aucune validation n’est accordée
+- aucun commit ne doit être effectué
+
+Cette règle est **non négociable**.
+
+---
+
+### 4.4 Règle absolue — Attribution et responsabilité des couches
+
+Toute fonctionnalité demandée dans le cadre du projet PiscisLab
+doit obligatoirement être rattachée à une **couche logique**.
+
+Le processus est le suivant :
+
+1. **Analyse de la fonctionnalité**
+   - La fonctionnalité est analysée dans son intention, son périmètre et ses impacts.
+
+2. **Choix de la couche par l’assistant**
+   - Le choix de la couche n’est pas imposé par l’utilisateur.
+   - L’assistant est responsable de proposer la couche la plus cohérente.
+
+3. **Justification explicite**
+   - Le choix de la couche doit être expliqué.
+   - Les raisons techniques et conceptuelles doivent être claires.
+
+4. **Documentation obligatoire**
+   - L’attribution de la fonctionnalité à une couche doit être documentée.
+   - Cette documentation fait partie intégrante de la décision.
+
+Les couches :
+- ne sont jamais figées
+- peuvent évoluer, être scindées ou déplacées
+- mais toujours de manière explicite et documentée
+
+Toute fonctionnalité sans couche clairement identifiée
+est considérée comme **non valide**.
+
+---
+
 ## 5. Données
 
 ### 5.1 Données publiques

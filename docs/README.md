@@ -27,6 +27,11 @@ Chaque document fait partie intégrante du socle et doit être respecté.
 
 > Définit le principe selon lequel chaque fichier de code est une documentation vivante, commentée et maintenable.
 
+### 📜 Gouvernance & règles de travail
+- [Gouvernance & règles de travail](./GOUVERNANCE_ET_REGLES_DE_TRAVAIL.md)
+
+> Définit les règles fondamentales du projet : méthode par étapes, process strict de modification des fichiers, documentation indexée et responsabilité de l’attribution des couches.
+
 ---
 
 ### 📦 Données publiques
