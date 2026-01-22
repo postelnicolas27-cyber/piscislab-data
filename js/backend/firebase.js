@@ -24,12 +24,12 @@ import { getFirestore } from "https://www.gstatic.com/firebasejs/10.7.1/firebase
  * during environment setup.
  */
 const firebaseConfig = {
-    apiKey: "TO_BE_DEFINED",
-    authDomain: "TO_BE_DEFINED",
-    projectId: "TO_BE_DEFINED",
-    storageBucket: "TO_BE_DEFINED",
-    messagingSenderId: "TO_BE_DEFINED",
-    appId: "TO_BE_DEFINED"
+    apiKey: "AIzaSyDlbCaLrJYjg-VumgKXP185rFd6NbBiTGg",
+    authDomain: "piscislab-28b38.firebaseapp.com",
+    projectId: "piscislab-28b38",
+    storageBucket: "piscislab-28b38.firebasestorage.app",
+    messagingSenderId: "936910312028",
+    appId: "1:936910312028:web:db1c6105e244023a7f8c99"
 };
 
 // Initialize Firebase App
