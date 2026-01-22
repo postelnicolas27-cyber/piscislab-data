@@ -30,6 +30,12 @@ doit être formalisée ici avant toute implémentation.
 > Définit la façon de travailler, les règles absolues, le rythme du projet, le protocole de clôture et de relance de conversation, ainsi que les responsabilités de décision.
 
 ---
+### 🔐 Backend & données utilisateur
+- [Firebase – socle backend validé](./FIREBASE_SETUP_VALIDÉ.md)
+
+> Documente le socle Firebase réellement implémenté :  
+> authentification, Firestore, règles de sécurité et modèle utilisateur.
+
 
 ### 🗺️ Carte interactive (base UI)
 - [Carte interactive – base conceptuelle](./CARTE_INTERACTIVE_BASE.md)
