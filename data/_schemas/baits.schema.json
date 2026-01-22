@@ -1,0 +1,61 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PiscisLab – Baits schema",
+  "description": "Schéma de validation pour les appâts (données publiques, lecture seule).",
+  "type": "object",
+  "required": [
+    "meta",
+    "items"
+  ],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": [
+        "project",
+        "type",
+        "version",
+        "readonly"
+      ],
+      "properties": {
+        "project": {
+          "type": "string",
+          "const": "PiscisLab"
+        },
+        "type": {
+          "type": "string",
+          "const": "baits"
+        },
+        "version": {
+          "type": "string"
+        },
+        "readonly": {
+          "type": "boolean",
+          "const": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "label"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Identifiant unique de l'appât"
+          },
+          "label": {
+            "type": "string",
+            "description": "Nom commun de l'appât"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
