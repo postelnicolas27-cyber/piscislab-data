@@ -24,7 +24,7 @@ import { getFirestore } from "https://www.gstatic.com/firebasejs/10.7.1/firebase
  * during environment setup.
  */
 const firebaseConfig = {
-    apiKey: "AIzaSyDlbCaLrJYjg-VumgKXP185rFd6NbBiTGg",
+    apiKey: "AIzaSyD1bCaLrJYjg-VumqKXPI85rFd6NbBiTGg",
     authDomain: "piscislab-28b38.firebaseapp.com",
     projectId: "piscislab-28b38",
     storageBucket: "piscislab-28b38.appspot.com",
