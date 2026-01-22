@@ -22,6 +22,10 @@ Chaque document fait partie intégrante du socle et doit être respecté.
 
 > Décrit l’environnement de travail local (VS Code, mini-serveur, HTML minimal) et les raisons des choix effectués.
 
+### 🧾 Code comme documentation
+- [Code comme documentation](./CODE_COMME_DOCUMENTATION.md)
+
+> Définit le principe selon lequel chaque fichier de code est une documentation vivante, commentée et maintenable.
 
 ---
 
