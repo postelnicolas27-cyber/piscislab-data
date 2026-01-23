@@ -1,0 +1,105 @@
+<!doctype html>
+<!--
+===============================================================================
+PiscisLab — index.html
+===============================================================================
+
+RÔLE DU FICHIER
+---------------
+Ce fichier est le point d’entrée VISUEL de PiscisLab dans un navigateur.
+
+Il ne contient :
+- AUCUNE logique métier
+- AUCUN calcul
+- AUCUNE donnée
+- AUCUNE décision applicative
+
+Son unique responsabilité est de :
+- fournir un support d’affichage
+- charger les dépendances nécessaires
+- définir les conteneurs HTML utilisés par le JavaScript
+
+Ce fichier est volontairement SIMPLE.
+Il est considéré comme :
+- modifiable
+- remplaçable
+- non figé
+
+Toute logique doit être déportée dans des fichiers JavaScript dédiés.
+
+-------------------------------------------------------------------------------
+
+DÉPENDANCES
+-----------
+- Leaflet (librairie cartographique JS)
+- js/map.js (logique carte PiscisLab)
+
+ORDRE DE CHARGEMENT IMPORTANT
+-----------------------------
+1. Le conteneur HTML (#map) DOIT exister avant l’exécution du JS
+2. Leaflet DOIT être chargé avant js/map.js
+3. Aucun JavaScript applicatif ne doit être écrit ici
+
+===============================================================================
+-->
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8" />
+    <title>PiscisLab — Carte</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        /*
+            Conteneur principal de la carte.
+            Leaflet injectera ici son rendu.
+        */
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+
+        /*
+            Placeholder UI — overlays applicatifs (login, panneaux, etc.)
+            --------------------------------------------------------------
+            - Vide par défaut
+            - Aucune logique
+            - Aucune dépendance
+            - Sera utilisé par le JS applicatif
+        */
+        #auth-overlay-root {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Conteneur UNIQUE de la carte -->
+    <div id="map"></div>
+
+    <!--
+        Placeholder UI
+        --------------
+        Point d’ancrage neutre pour les overlays (login, etc.)
+    -->
+    <div id="auth-overlay-root"></div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="./js/map.js"></script>
+    <script type="module" src="./js/main.js"></script>
+
+</body>
+
+</html>

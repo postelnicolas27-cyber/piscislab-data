@@ -14,8 +14,15 @@
  * docs/CHOIX_TECHNIQUES_LOCAUX.md
  */
 
-import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged }
-    from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import {
+    getAuth,
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
+    signOut,
+    onAuthStateChanged,
+    GoogleAuthProvider,
+    signInWithPopup
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 import { firebaseApp } from "./firebase.js";
 
@@ -27,6 +34,14 @@ const auth = getAuth(firebaseApp);
  */
 function signIn(email, password) {
     return signInWithEmailAndPassword(auth, email, password);
+}
+
+/**
+ * Connexion utilisateur via Google
+ */
+function signInWithGoogle() {
+    const provider = new GoogleAuthProvider();
+    return signInWithPopup(auth, provider);
 }
 
 /**
@@ -46,6 +61,14 @@ function onAuthChange(callback) {
 export {
     auth,
     signIn,
+    signUp,
+    signInWithGoogle,
     signOutUser,
     onAuthChange
 };
+/**
+ * Création de compte utilisateur (email / mot de passe)
+ */
+function signUp(email, password) {
+    return createUserWithEmailAndPassword(auth, email, password);
+}

@@ -1,0 +1,294 @@
+<!--
+===============================================================================
+PiscisLab — login-overlay.html
+===============================================================================
+
+RÔLE DU FICHIER
+---------------
+Fragment UI — Overlay de connexion.
+
+- HTML UNIQUEMENT
+- Aucun JavaScript
+- Aucune logique Firebase
+- Aucune logique métier
+- Destiné à être injecté dans #auth-overlay-root
+
+COUCHE
+------
+UI — Auth (présentation)
+
+===============================================================================
+-->
+
+<div class="auth-overlay auth-overlay-login" aria-hidden="true">
+    <div class="auth-backdrop"></div>
+
+    <section class="auth-panel" role="dialog" aria-labelledby="auth-title">
+        <header class="auth-header">
+            <div class="auth-intro">
+                <h1 class="auth-brand">🎣 PisciLab</h1>
+
+                <p class="auth-description">
+                    Plateforme cartographique et <strong>regroupement d’outils dédiés à la pêche</strong>.<br />
+                    🗺️ Visualisez les zones, 🧰 préparez vos sorties,
+                    📍 centralisez vos informations et
+                    🔒 gérez vos données personnelles en toute sécurité.
+                </p>
+            </div>
+
+
+
+            <h2 id="auth-title">🔐 Connexion</h2>
+            <p class="auth-subtitle">Accès à votre espace membre</p>
+        </header>
+
+
+        <!-- Connexion email / mot de passe -->
+        <form>
+            <label class="auth-field">
+                <span class="auth-label">📧 Email</span>
+                <input type="email" name="email" autocomplete="email" required />
+            </label>
+
+            <label class="auth-field">
+                <span class="auth-label">🔒 Mot de passe</span>
+                <div class="password-wrapper">
+                    <input type="password" name="password" autocomplete="current-password" required />
+                    <button type="button" class="password-toggle" aria-label="Afficher le mot de passe"
+                        title="Afficher / masquer le mot de passe">
+                        👁️
+                    </button>
+                </div>
+            </label>
+
+            <button type="submit">➡️ Se connecter</button>
+        </form>
+
+        <div class="auth-separator" aria-hidden="true">
+            <span>ou</span>
+        </div>
+
+        <button type="button" class="auth-google-btn" aria-label="Se connecter avec Google">
+            <span class="google-icon">G</span>
+            <span>Continuer avec Google</span>
+        </button>
+
+
+        <nav class="auth-links">
+            <a href="#" class="auth-link-signup">Créer un compte</a>
+
+            <span aria-hidden="true">•</span>
+            <a href="#">Mot de passe oublié</a>
+        </nav>
+
+    </section>
+</div>
+
+<style>
+    .auth-field {
+        display: grid;
+        gap: 6px;
+    }
+
+    .auth-label {
+        font-size: 0.95rem;
+    }
+
+    .password-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .password-wrapper input {
+        width: 100%;
+        padding-right: 40px;
+    }
+
+    .password-toggle {
+        position: absolute;
+        right: 6px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 1.1rem;
+        opacity: 0.7;
+    }
+
+    .password-toggle:hover {
+        opacity: 1;
+    }
+
+    .auth-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 10000;
+        pointer-events: auto;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+
+    .auth-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.45);
+    }
+
+    .auth-panel {
+        position: fixed;
+        /* 🔑 */
+        top: 50%;
+        /* 🔑 */
+        left: 50%;
+        /* 🔑 */
+        transform: translate(-50%, -50%);
+        /* 🔑 */
+        width: 100%;
+        max-width: 420px;
+        padding: 20px;
+        background: #fff;
+        color: #000;
+        border-radius: 8px;
+        z-index: 10001;
+        /* au-dessus du backdrop */
+    }
+
+
+
+
+    #auth-overlay-root .auth-overlay {
+        pointer-events: auto;
+    }
+
+    .auth-panel {
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+        animation: authFadeIn 0.25s ease-out;
+    }
+
+    @keyframes authFadeIn {
+        from {
+            opacity: 0;
+            transform: translate(-50%, -48%);
+        }
+
+        to {
+            opacity: 1;
+            transform: translate(-50%, -50%);
+        }
+    }
+
+    .auth-header {
+        margin-bottom: 20px;
+    }
+
+    .auth-intro {
+        font-size: 0.95rem;
+        line-height: 1.4;
+        margin-bottom: 14px;
+        color: #333;
+    }
+
+    .auth-intro strong {
+        font-weight: 600;
+    }
+
+    .auth-subtitle {
+        margin-top: 4px;
+        font-size: 0.9rem;
+        opacity: 0.75;
+    }
+
+    /* Champs */
+    .auth-panel input {
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .auth-panel input:focus {
+        outline: none;
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+    }
+
+    /* Boutons */
+    .auth-panel button[type="submit"] {
+        background: #2563eb;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+    }
+
+    .auth-panel button[type="submit"]:hover {
+        background: #1d4ed8;
+    }
+
+    .auth-google-btn {
+        border-radius: 6px;
+    }
+
+    .auth-google-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+        padding: 10px 12px;
+        font-size: 0.95rem;
+        font-weight: 500;
+        background: #fff;
+        color: #1f2937;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.2s, box-shadow 0.2s, transform 0.05s;
+    }
+
+    .auth-google-btn:hover {
+        background: #f9fafb;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .auth-google-btn:active {
+        transform: translateY(1px);
+    }
+
+    .google-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: linear-gradient(135deg,
+                #4285f4,
+                #34a853,
+                #fbbc05,
+                #ea4335);
+        color: #fff;
+        font-weight: 700;
+        font-size: 0.75rem;
+    }
+
+    .auth-intro {
+        margin-bottom: 18px;
+    }
+
+    .auth-brand {
+        margin: 0 0 8px;
+        font-size: 1.6rem;
+        font-weight: 700;
+        letter-spacing: 0.3px;
+    }
+
+    .auth-description {
+        margin: 0;
+        font-size: 0.95rem;
+        line-height: 1.45;
+        color: #374151;
+    }
+
+    .auth-brand {
+        font-size: 1.75rem;
+        letter-spacing: 0.5px;
+    }
+</style>

@@ -1,0 +1,77 @@
+<div class="auth-overlay auth-overlay-signup" aria-hidden="true">
+    <div class="auth-backdrop"></div>
+
+    <section class="auth-panel" role="dialog" aria-labelledby="signup-title">
+        <header class="auth-header">
+            <h2 id="signup-title">✨ Créer un compte</h2>
+            <p class="auth-subtitle">
+                Rejoignez PiscisLab et accédez à l’ensemble des outils dédiés à la pêche.
+            </p>
+        </header>
+
+        <form>
+            <label class="auth-field">
+                <span class="auth-label">📧 Email</span>
+                <input type="email" name="email" autocomplete="email" required />
+            </label>
+
+            <label class="auth-field auth-password-field">
+                <span class="auth-label">🔒 Mot de passe</span>
+                <div class="auth-password-wrapper">
+                    <input type="password" name="password" autocomplete="new-password" required />
+                    <button type="button" class="toggle-password" aria-label="Afficher le mot de passe">👁️</button>
+                </div>
+            </label>
+
+
+            <label class="auth-field auth-password-field">
+                <span class="auth-label">🔁 Confirmer le mot de passe</span>
+                <div class="auth-password-wrapper">
+                    <input type="password" name="passwordConfirm" autocomplete="new-password" required />
+                    <button type="button" class="toggle-password" aria-label="Afficher le mot de passe">👁️</button>
+                </div>
+            </label>
+
+
+            <button type="submit">🚀 Créer mon compte</button>
+        </form>
+
+        <nav class="auth-links">
+            <a href="#" class="auth-link-login">
+                Déjà un compte ? Se connecter
+            </a>
+        </nav>
+    </section>
+</div>
+
+<style>
+    .auth-overlay-signup {
+        display: none;
+    }
+</style>
+<style>
+    .auth-password-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .auth-password-wrapper input {
+        width: 100%;
+        padding-right: 42px;
+    }
+
+    .toggle-password {
+        position: absolute;
+        right: 6px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 1rem;
+        opacity: 0.7;
+    }
+
+    .toggle-password:hover {
+        opacity: 1;
+    }
+</style>
