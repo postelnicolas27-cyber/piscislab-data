@@ -43,6 +43,18 @@ Firebase est utilisé **uniquement** pour :
 Décision structurante :
 
 > **L’UID Firebase est la clé primaire universelle de l’utilisateur.**
+### 3.1 Authentication
+
+- Fournisseur activé : **Email / Mot de passe**
+- Authentification testée avec un compte réel
+- Fonctions validées :
+  - `signIn`
+  - `onAuthStateChanged`
+  - `signOut`
+
+Décision structurante :
+
+> **L’UID Firebase est la clé primaire universelle de l’utilisateur.**
 
 ---
 

@@ -61,10 +61,19 @@ doit être formalisée ici avant toute implémentation.
 ### 📜 Décisions & synthèses
 - [2026-01-22 — Base carte interactive & système de couches](./DECISIONS/2026-01-22_BASE_CARTE_ET_SYSTEME_DE_COUCHES.md)
 - [2026-01-23 — AUTH v1 (UI overlays & flux Auth)](./DECISIONS/2026-01-23_AUTH_V1_UI_OVERLAYS_ET_FLUX.md)
+
 - [2026-01-26 — Socle Firebase (Auth & Firestore)](./DECISIONS/2026-01-26_SOCLE_FIREBASE_AUTH_FIRESTORE.md)
 
 > Documents de synthèse contractuels reprenant les décisions structurantes validées du projet.
 
+> ℹ️ **Note de cohérence documentaire**  
+>  
+> Certains documents de décision antérieurs peuvent mentionner des mécanismes d’authentification
+> aujourd’hui obsolètes (ex. Google Sign-In).  
+>  
+> L’état **actuellement valide et opposable** du projet est documenté dans  
+> [`FIREBASE_SETUP_VALIDÉ.md`](./FIREBASE_SETUP_VALIDÉ.md) et dans le dossier  
+> [`APK_ANDROID/`](./APK_ANDROID/), où l’authentification est limitée à **email / mot de passe**.
 
 
 ---
