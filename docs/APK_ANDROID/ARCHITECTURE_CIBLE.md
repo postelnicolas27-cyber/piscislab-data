@@ -3,7 +3,7 @@
 ## 1. Objectif de ce document
 
 Ce document définit **l’architecture cible** de l’APK Android PiscisLab,
-suite à la décision technologique **DECISION-APK-001** (Capacitor + auth native).
+suite à la décision technologique **DECISION-APK-001**.
 
 Il a pour rôle de :
 - cadrer la séparation **Web / Native**,
@@ -28,9 +28,9 @@ L’APK Android PiscisLab repose sur le principe suivant :
 - Le **Web** reste la source principale de l’UI.
 - Le **Native** apporte uniquement :
   - l’accès aux capacités Android,
-  - la stabilité des intégrations sensibles (auth Google, GPS, permissions).
+  - la stabilité des intégrations sensibles (auth, GPS, stockage).
 
-Aucune logique métier n’est déplacée dans la couche native.
+Aucune logique métier PiscisLab n’est déplacée dans la couche native.
 
 ---
 
@@ -63,16 +63,17 @@ Contraintes :
 La couche native est **strictement utilitaire**.
 
 Responsabilités autorisées :
-- authentification Firebase **via SDK natif**,
-- accès GPS et permissions Android,
+- authentification Firebase **email / mot de passe** via SDK natif,
+- accès GPS et gestion des permissions Android,
 - accès au stockage local natif,
-- gestion du cycle de vie Android (foreground/background),
+- gestion du cycle de vie Android (foreground / background),
 - pont sécurisé Web ↔ Native.
 
 Responsabilités interdites :
-- logique métier métier PiscisLab,
+- logique métier PiscisLab,
 - duplication de logique UI,
-- rendu graphique applicatif.
+- rendu graphique applicatif,
+- intégration de fournisseurs OAuth tiers.
 
 ---
 
@@ -95,7 +96,7 @@ il **l’encapsule**.
 
 ## 5. Source des assets Web
 
-### Principe retenu (à ce stade)
+### Principe retenu (MVP)
 
 - L’APK embarque une **version packagée des assets Web**.
 - Les fichiers HTML / CSS / JS sont copiés dans l’APK lors du build.
@@ -105,9 +106,8 @@ Avantages :
 - performances stables,
 - indépendance réseau au lancement.
 
-⚠️ Les stratégies hybrides (UI distante / mise à jour dynamique)
-ne sont **pas exclues**, mais **hors périmètre MVP** et feront l’objet
-d’une décision dédiée.
+Les stratégies hybrides (UI distante, mise à jour dynamique)
+sont **hors périmètre MVP** et feront l’objet de décisions dédiées.
 
 ---
 
@@ -115,21 +115,21 @@ d’une décision dédiée.
 
 ### 6.1 Niveau minimal (socle)
 
-- La WebView charge l’UI.
+- La WebView charge l’UI Web.
 - Aucun pont custom obligatoire.
 - Le Web fonctionne de manière autonome.
 
-### 6.2 Niveau étendu (recommandé)
+### 6.2 Niveau étendu (auth, GPS, stockage)
 
 - Utilisation de plugins Capacitor pour :
-  - Auth Firebase native,
+  - Auth Firebase (email / mot de passe),
   - GPS,
   - Stockage local.
 
 Le Web :
-- détecte la disponibilité native,
-- consomme les services via des abstractions,
-- conserve des fallbacks Web si nécessaire.
+- déclenche les actions,
+- consomme les résultats via des abstractions,
+- ne connaît pas les détails natifs.
 
 ---
 
@@ -139,7 +139,7 @@ L’architecture prévoit la gestion explicite des permissions suivantes :
 
 - Accès réseau
 - Localisation (fine / coarse)
-- Stockage local (si requis)
+- Accès stockage local (si requis)
 
 Principes :
 - permissions demandées **au moment utile**,
@@ -160,18 +160,17 @@ seront définis dans une phase dédiée.
 
 ---
 
-## 9. Points hors périmètre (volontairement exclus)
+## 9. Points volontairement exclus
 
 Ce document **n’inclut pas** :
 - les commandes Capacitor,
-- la structure exacte des dossiers Android,
+- la structure détaillée du projet Android,
 - les fichiers Gradle,
-- les plugins précis à installer,
-- les flux d’auth détaillés,
-- la gestion offline avancée (cartes, tuiles).
+- la configuration Firebase Android,
+- la gestion offline cartographique avancée.
 
-Ces éléments relèvent des phases suivantes,
-après validation de l’architecture cible.
+Ces éléments relèvent des phases d’implémentation ultérieures,
+après validation explicite.
 
 ---
 
@@ -187,12 +186,11 @@ Toute implémentation APK :
 
 ## 11. Étape suivante
 
-La suite logique consiste à cadrer **l’authentification Firebase dans l’APK** :
+La suite logique consiste à cadrer **l’authentification Firebase dans l’APK Android** :
 
 ➡️ `AUTH_FIREBASE_ANDROID.md`
 
 Cette étape précisera :
 - le rôle exact de l’auth native,
 - la synchronisation Web ↔ Native,
-- la gestion de Google Sign-In,
 - les exigences de sécurité minimale.

@@ -9,11 +9,11 @@ reposant sur un socle **Web HTML / CSS / JavaScript vanilla**, intégrant :
 - UI modulaire via fragments HTML
 - Authentification **Firebase Auth** :
   - Email / mot de passe
-  - Reset password
-  - Google Sign-In
+  - Réinitialisation de mot de passe par email
 - Aucune dépendance à un framework front (React, Vue, etc.)
 
-L’authentification **AUTH v1 (Web)** est considérée comme **TERMINÉE et VALIDÉE**.
+L’authentification **AUTH v1 (Web)** est considérée comme **TERMINÉE et VALIDÉE**  
+dans son périmètre **email / mot de passe uniquement**.
 
 Ce dossier ouvre une **nouvelle phase dédiée à la préparation de l’APK Android**.
 
@@ -44,12 +44,15 @@ La décision suivante est **validée** et constitue un **pré-requis non négoci
 - **Capacitor** est retenu comme technologie de construction de l’APK Android.
 - L’application Android repose sur une **WebView** embarquant l’UI Web existante.
 - L’UI HTML / CSS / JS actuelle est **conservée sans refonte**.
-- L’authentification **Google + Firebase** est réalisée via **SDK natif Android**
-  (plugin Capacitor Firebase Authentication), et non via redirect Web.
+- L’authentification est réalisée via **Firebase Authentication**
+  en mode **email / mot de passe uniquement**.
+
+Aucun fournisseur OAuth tiers (Google, Apple, etc.) n’est utilisé.
 
 Cette décision :
 - autorise l’accès aux capacités natives (GPS, permissions, stockage, offline),
-- garantit la stabilité de Google Sign-In,
+- simplifie fortement l’architecture APK,
+- évite toute dépendance aux flux OAuth en environnement mobile,
 - évite toute migration vers React Native / Expo.
 
 ---
@@ -90,7 +93,7 @@ Les règles suivantes s’appliquent strictement à toute évolution APK :
 APK_ANDROID/
 ├── README.md → Contexte et cadre général
 ├── ARCHITECTURE_CIBLE.md → Architecture APK et Web ↔ Native
-├── AUTH_FIREBASE_ANDROID.md → Auth Firebase & Google dans l’APK
+├── AUTH_FIREBASE_ANDROID.md → Auth Firebase (email / mot de passe)
 └── PLAN_IMPLEMENTATION.md → Découpage des phases et validations
 
 yaml

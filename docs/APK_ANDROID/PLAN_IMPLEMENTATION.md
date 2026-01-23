@@ -1,253 +1,223 @@
-# 🧭 PiscisLab — Plan d’implémentation APK Android (Capacitor)
+# 🧭 PiscisLab — Plan d’implémentation APK Android
 
 ## 1. Objectif de ce document
 
-Ce document définit le **plan de travail contrôlé** pour construire l’APK Android PiscisLab
-sur la base des documents validés :
+Ce document définit le **plan d’implémentation contrôlé** de l’APK Android PiscisLab,
+sur la base des documents suivants, tous **validés** :
 
 - `README.md`
 - `ARCHITECTURE_CIBLE.md`
 - `AUTH_FIREBASE_ANDROID.md`
 
-Il fournit :
-- un découpage en **phases**,
-- l’ordre des priorités,
-- les risques techniques identifiés,
-- les **points de validation obligatoires**.
+Il vise à :
+- découper le travail en **phases claires**,
+- définir un **ordre de priorité strict**,
+- identifier les **risques techniques**,
+- imposer des **points de validation obligatoires**.
 
-Règle centrale :
+Règle absolue :
 > **Une phase = un objectif = une validation explicite.**  
-Aucun passage à la phase suivante sans validation.
+Aucune phase ne peut commencer sans validation de la précédente.
 
 ---
 
-## 2. Principes de réalisation (non négociables)
+## 2. Principes directeurs (non négociables)
 
-- ✅ UI Web existante embarquée (pas de refonte)
-- ✅ Capacitor = wrapper APK + pont Web ↔ Native
-- ✅ Auth Firebase/Google exécutée côté natif via SDK Android
-- ✅ Aucun flux Google via redirect WebView pour le MVP
+- ✅ UI Web existante **embarquée**, sans refonte
+- ✅ Capacitor utilisé uniquement comme **wrapper APK**
+- ✅ Firebase Auth **email / mot de passe uniquement**
+- ❌ Aucun fournisseur OAuth tiers
+- ❌ Aucun framework front ajouté
+- ❌ Aucune logique métier dans la couche native
 - ✅ Séparation stricte Web / Native
 - ✅ Documentation avant implémentation
-- ❌ Pas de code “précoce”
-- ❌ Pas d’ajout de framework front sans décision
 
 ---
 
-## 3. Périmètre MVP (APK v1)
+## 3. Périmètre fonctionnel du MVP APK
 
-Le MVP APK vise à livrer une application Android qui :
+Le MVP APK doit permettre :
 
-1. démarre et affiche l’UI Web (carte + structure actuelle),
-2. gère l’authentification (email/password + Google) via natif,
-3. gère la persistance de session,
-4. accède au GPS avec permissions,
-5. assure un stockage local minimal (paramètres / état),
-6. prépare un socle pour l’offline (sans offline carto avancé).
+1. le lancement stable de l’application Android,
+2. l’affichage complet de l’UI Web existante,
+3. l’authentification email / mot de passe,
+4. la persistance de session utilisateur,
+5. l’accès au GPS avec gestion des permissions,
+6. un fonctionnement dégradé sans réseau (offline v1).
 
----
-
-## 4. Phasage détaillé
-
-### PHASE 0 — Préparation & verrouillage documentaire
-**Objectif :** cadrage documentaire complet, opposable.
-
-Livrables :
-- `docs/APK_ANDROID/README.md`
-- `docs/APK_ANDROID/ARCHITECTURE_CIBLE.md`
-- `docs/APK_ANDROID/AUTH_FIREBASE_ANDROID.md`
-- `docs/APK_ANDROID/PLAN_IMPLEMENTATION.md` (ce document)
-
-✅ Validation PHASE 0 :
-- les 4 documents sont validés explicitement.
+Le MVP **n’inclut pas** :
+- l’authentification via Google ou autre tiers,
+- l’offline cartographique avancé (tuiles),
+- la synchronisation complexe en arrière-plan.
 
 ---
 
-### PHASE 1 — Socle Capacitor (Wrapper APK minimal)
-**Objectif :** obtenir une APK qui lance l’UI Web **embarquée** sans régression UI.
+## 4. Découpage en phases
+
+### 🔹 PHASE 0 — Cadrage & préparation (terminée)
+**Objectif** : verrouiller la documentation et les décisions.
+
+Statut :
+- Documentation APK complète
+- Désimplémentation Google Auth
+- Code Web et docs alignés
+
+✅ PHASE 0 **VALIDÉE**
+
+---
+
+### 🔹 PHASE 1 — Socle Capacitor (wrapper APK)
+**Objectif** : obtenir une APK Android installable affichant l’UI Web.
 
 Périmètre :
-- intégration Capacitor,
-- packaging des assets Web,
+- initialisation Capacitor,
+- intégration des assets Web,
 - lancement WebView stable.
 
 Exclusions :
-- pas d’auth,
-- pas de GPS,
-- pas de stockage avancé.
+- authentification,
+- Firebase,
+- GPS,
+- stockage local.
 
-✅ Validation PHASE 1 :
-- APK installable,
-- UI Web s’affiche correctement (carte + overlays),
-- navigation UI OK,
+✅ Validation attendue :
+- APK installable sur téléphone,
+- UI Web affichée sans régression,
 - aucune erreur bloquante au démarrage.
 
 ---
 
-### PHASE 2 — Auth email/password (via natif)
-**Objectif :** reproduire le comportement Auth v1 Web dans l’APK, via le natif.
+### 🔹 PHASE 2 — Auth Firebase email / mot de passe
+**Objectif** : rendre l’authentification fonctionnelle dans l’APK.
 
 Périmètre :
-- login email/password,
-- signup email/password (si existant dans v1),
-- reset password,
-- logout,
-- persistance session.
+- connexion email / mot de passe,
+- création de compte,
+- réinitialisation de mot de passe,
+- déconnexion,
+- persistance de session.
 
 Exclusions :
-- Google Sign-In (phase dédiée),
+- fournisseurs OAuth tiers,
 - deep links.
 
-✅ Validation PHASE 2 :
-- login/logout OK,
-- reset password OK,
-- persistance session OK (fermer/réouvrir l’app),
-- erreurs UI propres (standardisées / non sensibles).
+✅ Validation attendue :
+- flux auth complets fonctionnels,
+- persistance session après redémarrage,
+- messages d’erreur UI propres et non sensibles.
 
 ---
 
-### PHASE 3 — Google Sign-In (via natif)
-**Objectif :** activer Google Sign-In robuste, sans redirect Web.
+### 🔹 PHASE 3 — GPS & permissions Android
+**Objectif** : permettre la géolocalisation utilisateur.
 
 Périmètre :
-- connexion Google,
-- annulation utilisateur gérée,
-- logout,
-- persistance session,
-- cohérence UI (badge/état).
+- demande de permission GPS,
+- gestion du refus utilisateur,
+- récupération de la position,
+- transmission au Web pour usage cartographique.
 
-✅ Validation PHASE 3 :
-- login Google OK,
-- annulation = retour UI propre,
-- persistance session OK,
-- aucun retour navigateur “perdu”,
-- cohérence avec l’état auth minimal.
+✅ Validation attendue :
+- permissions demandées au bon moment,
+- refus géré sans crash,
+- position exploitée dans la carte.
 
 ---
 
-### PHASE 4 — GPS + permissions Android
-**Objectif :** obtenir la position GPS et l’injecter dans la logique cartographique Web.
+### 🔹 PHASE 4 — Stockage local minimal
+**Objectif** : améliorer la stabilité et l’expérience utilisateur.
 
-Périmètre :
-- demande de permission au moment opportun,
-- gestion refus permission,
-- récupération position,
-- transmission au Web (pont).
-
-✅ Validation PHASE 4 :
-- permission demandée correctement,
-- refus permission géré (message UI + fallback),
-- position récupérée et utilisée dans la carte,
-- aucun crash / boucle permission.
-
----
-
-### PHASE 5 — Stockage local minimal
-**Objectif :** stocker localement un socle de données non sensibles pour stabilité UX.
-
-Périmètre (exemples de besoins, à valider à l’implémentation) :
+Périmètre possible :
 - préférences UI (thème, derniers choix),
-- état auth minimal (uniquement si nécessaire côté UI — pas de secrets),
-- derniers paramètres carto (dernier zoom/centre),
-- flags “offline mode” (si présent).
+- état de session non sensible,
+- derniers paramètres cartographiques.
 
-✅ Validation PHASE 5 :
-- données persistantes au redémarrage,
-- aucune exposition de secrets,
-- comportement stable offline de base (UI s’ouvre).
+Contraintes :
+- aucun stockage de secrets,
+- données locales non critiques uniquement.
+
+✅ Validation attendue :
+- données persistantes après redémarrage,
+- comportement stable offline partiel.
 
 ---
 
-### PHASE 6 — Offline v1 (non cartographique avancé)
-**Objectif :** assurer une continuité d’usage sans réseau, sans viser les tuiles offline.
+### 🔹 PHASE 5 — Offline v1 (hors cartographie avancée)
+**Objectif** : garantir un démarrage et une UX minimale sans réseau.
 
 Périmètre :
-- détection offline,
-- messages UI adaptés,
-- fonctionnement des éléments locaux (préférences, cache minimal),
-- interdiction de dépendre du réseau au lancement.
+- détection de l’état offline,
+- affichage de messages adaptés,
+- accès aux données locales disponibles.
 
 Exclusions :
-- caching tuiles OSM/Leaflet (phase future dédiée),
-- synchronisation avancée.
+- cache de tuiles cartographiques,
+- synchronisation différée avancée.
 
-✅ Validation PHASE 6 :
-- app démarre sans réseau,
-- UI s’affiche,
-- message offline clair,
-- pas d’erreurs bloquantes.
+✅ Validation attendue :
+- app lançable sans réseau,
+- UI accessible,
+- aucun blocage critique.
 
 ---
 
-## 5. Ordre des priorités
+## 5. Ordre de priorité strict
 
-Priorité absolue :
-1) PHASE 1 (wrapper stable)
-2) PHASE 2 (auth email/password)
-3) PHASE 3 (Google natif)
-4) PHASE 4 (GPS)
-5) PHASE 5 (stockage)
-6) PHASE 6 (offline v1)
+1. PHASE 1 — Wrapper APK
+2. PHASE 2 — Auth Firebase email / mot de passe
+3. PHASE 3 — GPS & permissions
+4. PHASE 4 — Stockage local
+5. PHASE 5 — Offline v1
 
-Raison :
-- garantir d’abord un conteneur stable,
-- sécuriser l’accès compte / session,
-- stabiliser Google (source classique de blocage),
-- ajouter ensuite les capacités carto mobiles.
+Toute inversion de priorité nécessite une **décision documentée**.
 
 ---
 
 ## 6. Risques techniques identifiés
 
-1) **Google Sign-In** : configuration Android (certificats / empreintes / projet Firebase)  
-   → risque de blocage en PHASE 3.
-
-2) **Synchronisation état auth Web ↔ Native**  
-   → risque d’incohérence UI si le Web ne reçoit pas l’état à temps.
-
-3) **WebView / compatibilité** (permissions, stockage, comportements spécifiques Android)  
-   → risque de régressions UI en PHASE 1.
-
-4) **GPS / permissions runtime**  
-   → risque UX si refus permission non géré.
-
-5) **Offline** : attentes utilisateur vs limites (tuiles)  
-   → besoin d’un cadrage explicite avant d’annoncer une promesse offline carto.
+- incohérence d’état Web ↔ Native,
+- comportement spécifique WebView Android,
+- gestion incorrecte des permissions GPS,
+- attentes utilisateur excessives sur l’offline,
+- persistance de session mal synchronisée.
 
 Chaque risque doit être :
-- suivi par une validation,
-- documenté en fin de conversation si décision impliquée.
+- identifié avant implémentation,
+- validé fonctionnellement en fin de phase.
 
 ---
 
 ## 7. Points de validation obligatoires (checklist)
 
-- ✅ Validation PHASE 1 : APK affiche l’UI
-- ✅ Validation PHASE 2 : email/password + reset + persistance
-- ✅ Validation PHASE 3 : Google Sign-In natif + persistance + annulation
-- ✅ Validation PHASE 4 : GPS + permissions + fallback
-- ✅ Validation PHASE 5 : stockage local minimal + non sensible
-- ✅ Validation PHASE 6 : lancement offline + UX offline
+- ✅ PHASE 1 : APK installable + UI affichée
+- ✅ PHASE 2 : Auth email / mot de passe + persistance
+- ✅ PHASE 3 : GPS fonctionnel + permissions maîtrisées
+- ✅ PHASE 4 : Stockage local stable
+- ✅ PHASE 5 : Démarrage offline sans blocage
+
+Aucune phase ne peut être considérée comme terminée
+sans validation explicite.
 
 ---
 
 ## 8. Sortie attendue (fin de cycle MVP)
 
-L’APK PiscisLab MVP est considérée prête si :
-- elle s’installe et s’exécute de façon stable,
-- l’auth (email + Google) est robuste et persistante,
-- le GPS est fonctionnel,
+L’APK PiscisLab MVP est considéré prêt lorsque :
+
+- l’application est stable,
+- l’authentification email / mot de passe est fiable,
+- le GPS est opérationnel,
 - l’app démarre sans réseau,
 - la gouvernance “étape par étape” a été respectée,
-- une synthèse de clôture est produite (archivage fin de conversation).
+- une synthèse de fin de conversation est produite.
 
 ---
 
 ## 9. Étape suivante
 
-Une fois ce plan validé :
+Après validation de ce document :
 
-➡️ démarrage **PHASE 1 — Socle Capacitor (wrapper minimal)**
+➡️ ouverture officielle de **PHASE 1 — Socle Capacitor**
 
-Aucune commande / implémentation ne doit commencer
-sans validation explicite de ce document.
+Aucune implémentation ne doit débuter
+sans cette validation explicite.

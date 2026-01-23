@@ -25,7 +25,7 @@
 
 import { loadLoginOverlay } from "./ui/loginOverlay.js";
 import { initLoginController } from "./ui/loginController.js";
-import { initGoogleLoginController } from "./ui/googleLoginController.js";
+
 import { initAuthStateController } from "./ui/authStateController.js";
 import { initUserBootstrap } from "./backend/userBootstrap.js";
 import { initPasswordToggleController } from "./ui/passwordToggleController.js";
@@ -42,7 +42,7 @@ async function bootstrapApp() {
 
     // 2. Brancher les contrôleurs UI (le DOM existe maintenant)
     initLoginController();
-    initGoogleLoginController();
+
 
     // 3. Écouter l’état Auth (affiche / masque login)
     initAuthStateController();

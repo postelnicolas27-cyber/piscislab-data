@@ -21,7 +21,7 @@ import {
     sendPasswordResetEmail,
     signOut,
     onAuthStateChanged,
-    GoogleAuthProvider,
+
     signInWithPopup
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
@@ -37,13 +37,7 @@ function signIn(email, password) {
     return signInWithEmailAndPassword(auth, email, password);
 }
 
-/**
- * Connexion utilisateur via Google
- */
-function signInWithGoogle() {
-    const provider = new GoogleAuthProvider();
-    return signInWithPopup(auth, provider);
-}
+
 
 /**
  * Déconnexion utilisateur
@@ -64,7 +58,7 @@ export {
     signIn,
     signUp,
     resetPassword,
-    signInWithGoogle,
+
     signOutUser,
     onAuthChange
 };
