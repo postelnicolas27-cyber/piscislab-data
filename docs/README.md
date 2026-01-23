@@ -60,9 +60,11 @@ doit être formalisée ici avant toute implémentation.
 
 ### 📜 Décisions & synthèses
 - [2026-01-22 — Base carte interactive & système de couches](./DECISIONS/2026-01-22_BASE_CARTE_ET_SYSTEME_DE_COUCHES.md)
+- [2026-01-23 — AUTH v1 (UI overlays & flux Auth)](./DECISIONS/2026-01-23_AUTH_V1_UI_OVERLAYS_ET_FLUX.md)
 - [2026-01-26 — Socle Firebase (Auth & Firestore)](./DECISIONS/2026-01-26_SOCLE_FIREBASE_AUTH_FIRESTORE.md)
 
 > Documents de synthèse contractuels reprenant les décisions structurantes validées du projet.
+
 
 
 ---
