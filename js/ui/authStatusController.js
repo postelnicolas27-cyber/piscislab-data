@@ -26,6 +26,7 @@ import { onAuthChange, signOutUser } from "../backend/auth.js";
 
 let statusElement = null;
 let logoutButton = null;
+let statusLabel = null;
 
 /**
  * Initialise le badge d’état Auth.
@@ -35,6 +36,11 @@ export function initAuthStatusController() {
     statusElement = document.querySelector(".auth-status");
     if (!statusElement) {
         console.warn("[authStatusController] badge auth-status introuvable");
+        return;
+    }
+    statusLabel = statusElement.querySelector(".auth-status-label");
+    if (!statusLabel) {
+        console.warn("[authStatusController] label auth-status-label introuvable");
         return;
     }
 
@@ -54,9 +60,12 @@ export function initAuthStatusController() {
 
     onAuthChange((user) => {
         if (user) {
+            statusLabel.textContent = `👤 ${user.email ?? "Utilisateur connecté"}`;
             statusElement.style.display = "flex";
         } else {
             statusElement.style.display = "none";
+            statusLabel.textContent = "👤";
         }
     });
+
 }
