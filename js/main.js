@@ -34,6 +34,7 @@ import { initAuthStatusController } from "./ui/authStatusController.js";
 import { initSignupController } from "./ui/signupController.js";
 import { initAuthViewToggle } from "./ui/authViewToggle.js";
 import { initPasswordToggle } from "./ui/passwordToggle.js";
+import { initResetPasswordController } from "./ui/resetPasswordController.js";
 
 async function bootstrapApp() {
     // 1. Charger et injecter l’overlay login
@@ -58,6 +59,7 @@ async function bootstrapApp() {
     initSignupController();
     initAuthViewToggle();
     initPasswordToggle();
+    initResetPasswordController();
 
 
 }

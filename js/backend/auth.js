@@ -18,6 +18,7 @@ import {
     getAuth,
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
+    sendPasswordResetEmail,
     signOut,
     onAuthStateChanged,
     GoogleAuthProvider,
@@ -62,6 +63,7 @@ export {
     auth,
     signIn,
     signUp,
+    resetPassword,
     signInWithGoogle,
     signOutUser,
     onAuthChange
@@ -71,4 +73,10 @@ export {
  */
 function signUp(email, password) {
     return createUserWithEmailAndPassword(auth, email, password);
+}
+/**
+ * Réinitialisation du mot de passe (email)
+ */
+function resetPassword(email) {
+    return sendPasswordResetEmail(auth, email);
 }

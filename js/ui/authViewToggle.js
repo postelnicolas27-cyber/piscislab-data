@@ -16,15 +16,21 @@
 export function initAuthViewToggle() {
     const loginOverlay = document.querySelector(".auth-overlay-login");
     const signupOverlay = document.querySelector(".auth-overlay-signup");
+    const resetOverlay = document.querySelector(".auth-overlay-reset");
 
 
-    if (!loginOverlay || !signupOverlay) {
-        console.warn("[authViewToggle] overlays introuvables");
+    if (!loginOverlay) {
+        console.warn("[authViewToggle] login overlay introuvable");
         return;
     }
 
+    const toReset = loginOverlay.querySelector(".auth-link-reset");
+
     const toSignup = loginOverlay.querySelector(".auth-link-signup");
-    const toLogin = signupOverlay.querySelector(".auth-link-login");
+    const toLogin = signupOverlay
+        ? signupOverlay.querySelector(".auth-link-login")
+        : null;
+
 
     if (toSignup) {
         toSignup.addEventListener("click", (e) => {
@@ -45,5 +51,25 @@ export function initAuthViewToggle() {
     } else {
         console.warn("[authViewToggle] lien auth-link-login introuvable");
     }
+    if (toReset && resetOverlay) {
+        toReset.addEventListener("click", (e) => {
+            e.preventDefault();
+            loginOverlay.style.display = "none";
+            signupOverlay.style.display = "none";
+            resetOverlay.style.display = "block";
+        });
+    }
+
+    if (resetOverlay) {
+        const backToLogin = resetOverlay.querySelector(".auth-link-login");
+        if (backToLogin) {
+            backToLogin.addEventListener("click", (e) => {
+                e.preventDefault();
+                resetOverlay.style.display = "none";
+                loginOverlay.style.display = "block";
+            });
+        }
+    }
+
 }
 

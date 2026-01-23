@@ -13,6 +13,7 @@
 const OVERLAY_ROOT_ID = "auth-overlay-root";
 const LOGIN_FRAGMENT_URL = "/web/fragments/login-overlay.html";
 const SIGNUP_FRAGMENT_URL = "/web/fragments/signup-overlay.html";
+const RESET_FRAGMENT_URL = "/web/fragments/reset-password-overlay.html";
 
 let loginOverlayElement = null;
 let signupOverlayElement = null;
@@ -43,8 +44,15 @@ export async function loadLoginOverlay() {
     }
     const signupHtml = await signupResponse.text();
     root.insertAdjacentHTML("beforeend", signupHtml);
+    // 3) Inject reset-password
+    const resetResponse = await fetch(RESET_FRAGMENT_URL);
+    if (!resetResponse.ok) {
+        throw new Error("[loginOverlay] Échec chargement fragment reset-password");
+    }
+    const resetHtml = await resetResponse.text();
+    root.insertAdjacentHTML("beforeend", resetHtml);
 
-    // 3) Récupérer les overlays
+    // 4) Récupérer les overlays
     loginOverlayElement = root.querySelector(".auth-overlay-login");
     if (!loginOverlayElement) {
         throw new Error("[loginOverlay] .auth-overlay-login introuvable");
@@ -54,8 +62,15 @@ export async function loadLoginOverlay() {
     if (!signupOverlayElement) {
         throw new Error("[loginOverlay] .auth-overlay-signup introuvable");
     }
+    const resetOverlayElement = root.querySelector(".auth-overlay-reset");
+    if (!resetOverlayElement) {
+        throw new Error("[loginOverlay] .auth-overlay-reset introuvable");
+    }
 
-    // 4) État initial : tout caché (login piloté par authStateController)
+    resetOverlayElement.style.display = "none";
+    resetOverlayElement.setAttribute("aria-hidden", "true");
+
+    // 5) État initial : tout caché (login piloté par authStateController)
     loginOverlayElement.style.display = "none";
     loginOverlayElement.setAttribute("aria-hidden", "true");
 
